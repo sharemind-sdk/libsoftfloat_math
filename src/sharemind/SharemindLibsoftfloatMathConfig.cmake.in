@@ -1,0 +1,17 @@
+#
+# Copyright (C) Cybernetica AS
+#
+# All rights are reserved. Reproduction in whole or part is prohibited
+# without the written consent of the copyright owner. The usage of this
+# code is subject to the appropriate license agreement.
+#
+
+# This file defines the following variables:
+#   SharemindLibsoftfloat_INCLUDE_DIRS - include directories
+#   SharemindLibsoftfloat_LIBRARIES    - libraries to link against
+#   SharemindLibsoftfloat_DEFINITIONS  - required compiler definitions
+
+
+SET(SharemindLibsoftfloatMath_INCLUDE_DIRS @LIBSOFTFLOAT_MATH_INSTALL_INCLUDE_DIRS@)
+SET(SharemindLibsoftfloatMath_LIBRARIES @LIBSOFTFLOAT_MATH_INSTALL_LINK_LIBRARIES@)
+SET(SharemindLibsoftfloatMath_DEFINITIONS @LIBSOFTFLOAT_MATH_INSTALL_DEFINITIONS@)
