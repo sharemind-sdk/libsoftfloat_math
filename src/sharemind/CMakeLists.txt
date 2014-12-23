@@ -36,13 +36,16 @@ FLAGS_MAGIC("Weverything")
 FLAGS_MAGIC("Wlogical-op")
 
 FIND_PACKAGE(SharemindLibsoftfloat REQUIRED)
+FIND_PACKAGE(SharemindVmGlobals REQUIRED)
 
 INCLUDE_DIRECTORIES(
     ${SharemindLibsoftfloat_INCLUDE_DIRS}
+    ${SharemindVmGlobals_INCLUDE_DIRS}
 )
 
 ADD_DEFINITIONS(
     ${SharemindLibsoftfloat_DEFINITIONS}
+    ${SharemindVmGlobals_DEFINITIONS}
     "-D__STDC_LIMIT_MACROS"
     "-D__STDC_CONSTANT_MACROS"
 )
@@ -82,6 +85,7 @@ ADD_LIBRARY("libsoftfloat_math" STATIC ${SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES}
 
 TARGET_LINK_LIBRARIES("libsoftfloat_math"
     ${SharemindLibsoftfloat_LIBRARIES}
+    ${SharemindVmGlobals_LIBRARIES}
 )
 
 SET(LIBSOFTFLOAT_MATH_VERSION "0.1.0.0")
