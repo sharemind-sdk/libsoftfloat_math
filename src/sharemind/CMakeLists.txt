@@ -54,34 +54,18 @@ ADD_DEFINITIONS(
 # libsoftfloat_math
 ################################################################################
 
-SET(SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS
-    "3rdparty/libsoftfloat_math/sf_abs.h"
-    "3rdparty/libsoftfloat_math/sf_ceil.h"
-    "3rdparty/libsoftfloat_math/sf_erf.h"
-    "3rdparty/libsoftfloat_math/sf_exp.h"
-    "3rdparty/libsoftfloat_math/sf_floor.h"
-    "3rdparty/libsoftfloat_math/sf_log.h"
-    "3rdparty/libsoftfloat_math/sf_scalbn.h"
-    "3rdparty/libsoftfloat_math/sf_sin.h"
-)
-
-SET(SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES
-    "3rdparty/libsoftfloat_math/internal/__sf_cos.c"
-    "3rdparty/libsoftfloat_math/internal/__sf_rem_pio2.c"
-    "3rdparty/libsoftfloat_math/internal/__sf_rem_pio2_large.c"
-    "3rdparty/libsoftfloat_math/internal/__sf_sin.c"
-    "3rdparty/libsoftfloat_math/sf_abs.c"
-    "3rdparty/libsoftfloat_math/sf_ceil.c"
-    "3rdparty/libsoftfloat_math/sf_erf.c"
-    "3rdparty/libsoftfloat_math/sf_exp.c"
-    "3rdparty/libsoftfloat_math/sf_floor.c"
-    "3rdparty/libsoftfloat_math/sf_log.c"
-    "3rdparty/libsoftfloat_math/sf_scalbn.c"
-    "3rdparty/libsoftfloat_math/sf_sin.c"
-)
+FILE(GLOB SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS
+    "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libsoftfloat_math/*.h")
+FILE(GLOB_RECURSE SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P
+     "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libsoftfloat_math/*.h")
+LIST(REMOVE_ITEM SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P
+     ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS})
+FILE(GLOB_RECURSE SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES
+     "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libsoftfloat_math/*.c")
 
 ADD_LIBRARY("libsoftfloat_math" STATIC ${SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES}
-                                       ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS})
+                                       ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS}
+                                       ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P})
 
 TARGET_LINK_LIBRARIES("libsoftfloat_math"
     ${SharemindLibsoftfloat_LIBRARIES}
