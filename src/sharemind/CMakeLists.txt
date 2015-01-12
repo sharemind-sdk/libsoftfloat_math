@@ -35,17 +35,17 @@ ENDMACRO(FLAGS_MAGIC)
 FLAGS_MAGIC("Weverything")
 FLAGS_MAGIC("Wlogical-op")
 
+FIND_PACKAGE(SharemindCHeaders REQUIRED)
 FIND_PACKAGE(SharemindLibsoftfloat REQUIRED)
-FIND_PACKAGE(SharemindVmGlobals REQUIRED)
 
 INCLUDE_DIRECTORIES(
+    ${SharemindCHeaders_INCLUDE_DIRS}
     ${SharemindLibsoftfloat_INCLUDE_DIRS}
-    ${SharemindVmGlobals_INCLUDE_DIRS}
 )
 
 ADD_DEFINITIONS(
+    ${SharemindCHeaders_DEFINITIONS}
     ${SharemindLibsoftfloat_DEFINITIONS}
-    ${SharemindVmGlobals_DEFINITIONS}
     "-D__STDC_LIMIT_MACROS"
     "-D__STDC_CONSTANT_MACROS"
 )
@@ -68,8 +68,8 @@ ADD_LIBRARY("libsoftfloat_math" STATIC ${SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES}
                                        ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P})
 
 TARGET_LINK_LIBRARIES("libsoftfloat_math"
+    ${SharemindCHeaders_LIBRARIES}
     ${SharemindLibsoftfloat_LIBRARIES}
-    ${SharemindVmGlobals_LIBRARIES}
 )
 
 SET(LIBSOFTFLOAT_MATH_VERSION "0.1.0.0")
