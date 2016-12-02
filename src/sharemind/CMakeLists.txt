@@ -55,6 +55,7 @@ MACRO(FLAGS_MAGIC flags)
 ENDMACRO(FLAGS_MAGIC)
 FLAGS_MAGIC("Weverything")
 FLAGS_MAGIC("Wlogical-op")
+FLAGS_MAGIC("Wno-padded")
 
 FIND_PACKAGE(SharemindCHeaders REQUIRED)
 FIND_PACKAGE(SharemindLibsoftfloat REQUIRED)
