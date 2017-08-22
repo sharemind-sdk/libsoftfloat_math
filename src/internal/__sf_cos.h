@@ -28,18 +28,15 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SF_ABS_H
-#define SF_ABS_H
+#ifndef INTERNAL___SF_COS_H
+#define INTERNAL___SF_COS_H
 
-#include <sharemind/3rdparty/libsoftfloat/softfloat.h>
-#include <sharemind/extern_c.h>
+#include <sharemind/libsoftfloat/softfloat.h>
 
 
-SHAREMIND_EXTERN_C_BEGIN
+sf_result32f __sf_float32_cos(sf_float64 x, sf_fpu_state fpu)
+        __attribute__ ((visibility ("internal")));
+sf_result64f __sf_float64_cos(sf_float64 x, sf_float64 y, sf_fpu_state fpu)
+        __attribute__ ((visibility ("internal")));
 
-sf_float32 sf_float32_abs(sf_float32 x);
-sf_float64 sf_float64_abs(sf_float64 x);
-
-SHAREMIND_EXTERN_C_END
-
-#endif /* SF_ABS_H */
+#endif /* INTERNAL___SF_COS_H */

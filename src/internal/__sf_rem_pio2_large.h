@@ -28,18 +28,19 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SF_SCALBN_H
-#define SF_SCALBN_H
+#ifndef INTERNAL___SF_REM_PIO2_LARGE_H
+#define INTERNAL___SF_REM_PIO2_LARGE_H
 
-#include <sharemind/3rdparty/libsoftfloat/softfloat.h>
-#include <sharemind/extern_c.h>
+#include <sharemind/libsoftfloat/softfloat.h>
+#include <stdint.h>
 
 
-SHAREMIND_EXTERN_C_BEGIN
+sf_result32i __sf_float64_rem_pio2_large(sf_float64 * x,
+                                         sf_float64 * y,
+                                         int64_t e0,
+                                         int64_t nx,
+                                         int64_t prec,
+                                         sf_fpu_state fpu)
+        __attribute__ ((visibility ("internal")));
 
-sf_result32f sf_float32_scalbn(sf_float32 x, sf_int32 n, sf_fpu_state fpu);
-sf_result64f sf_float64_scalbn(sf_float64 x, sf_int64 n, sf_fpu_state fpu);
-
-SHAREMIND_EXTERN_C_END
-
-#endif /* SF_SCALBN_H */
+#endif /* INTERNAL___SF_REM_PIO2_LARGE_H */

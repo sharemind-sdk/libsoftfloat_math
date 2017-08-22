@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2015, Cybernetica AS
+# Copyright (c) Cybernetica AS
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -28,10 +28,92 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-CMAKE_MINIMUM_REQUIRED(VERSION "2.8")
-PROJECT("SHAREMIND_LIBSOFTFLOAT_MATH" "C")
+CMAKE_MINIMUM_REQUIRED(VERSION "3.0.0")
+PROJECT(SharemindLibSoftfloatMath VERSION 0.1.0 LANGUAGES C)
 
 INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/config.local" OPTIONAL)
 INCLUDE("${CMAKE_CURRENT_BINARY_DIR}/config.local" OPTIONAL)
 
-ADD_SUBDIRECTORY("src/sharemind/")
+FIND_PACKAGE(SharemindCMakeHelpers REQUIRED)
+
+SharemindSetProjectVersion()
+
+SharemindSetC99CompileOptions(COMPILE_FLAGS "-fwrapv")
+
+FIND_PACKAGE(SharemindCHeaders REQUIRED)
+FIND_PACKAGE(SharemindLibSoftfloat REQUIRED)
+
+INCLUDE_DIRECTORIES(
+    ${SharemindCHeaders_INCLUDE_DIRS}
+    ${SharemindLibSoftfloat_INCLUDE_DIRS}
+)
+
+ADD_DEFINITIONS(
+    ${SharemindCHeaders_DEFINITIONS}
+    ${SharemindLibSoftfloat_DEFINITIONS}
+)
+
+################################################################################
+# libsoftfloat_math
+################################################################################
+
+FILE(GLOB SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
+FILE(GLOB_RECURSE SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P
+     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
+LIST(REMOVE_ITEM SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P
+     ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS})
+FILE(GLOB_RECURSE SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES
+     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
+
+SharemindAddSharedLibrary("libsoftfloat_math"
+    OUTPUT_NAME "sharemind_softfloat_math"
+    SOURCES
+        ${SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES}
+        ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS}
+        ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P}
+    LINK_LIBRARIES
+        ${SharemindCHeaders_LIBRARIES}
+        ${SharemindLibSoftfloat_LIBRARIES}
+)
+
+INSTALL(FILES ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS}
+        DESTINATION "include/sharemind/libsoftfloat_math/"
+        COMPONENT "dev")
+
+# Install cmake files:
+SET(SharemindLibSoftfloatMath_INSTALL_LIBRARIES
+    "-L${CMAKE_INSTALL_PREFIX}/lib"
+    "-lsharemind_softfloat_math"
+)
+SET(SharemindLibSoftfloatMath_INSTALL_INCLUDE_DIRS
+    "${CMAKE_INSTALL_PREFIX}/include"
+)
+SharemindUseCMakeFindFiles()
+
+
+# Packaging:
+SharemindSetupPackaging()
+SharemindAddComponentPackage("lib"
+    NAME "libsharemind-softfloat-math"
+    DESCRIPTION "Sharemind SoftFloat Math library"
+    DEB_SECTION "libs"
+    DEB_DEPENDS
+        "libsharemind-softfloat"
+        "libc6 (>= 2.19)"
+)
+SharemindAddComponentPackage("dev"
+    NAME "libsharemind-softfloat-math-dev"
+    DESCRIPTION "Sharemind SoftFloat Math library development headers"
+    DEB_SECTION "libdevel"
+    DEB_DEPENDS
+        "libsharemind-softfloat-math (= ${SharemindLibSoftfloatMath_VERSION})"
+        "libc6-dev (>= 2.19)"
+)
+SharemindAddComponentPackage("debug"
+    NAME "libsharemind-softfloat-math-dbg"
+    DESCRIPTION "Sharemind SoftFloat Math library debugging symbols"
+    DEB_SECTION "debug"
+    DEB_DEPENDS "libsharemind-softfloat-math (= ${SharemindLibSoftfloatMath_VERSION})"
+)
+SharemindPackagingFinalize()

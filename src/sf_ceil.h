@@ -28,13 +28,18 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef INTERNAL___SF_COS_H
-#define INTERNAL___SF_COS_H
+#ifndef SF_CEIL_H
+#define SF_CEIL_H
 
-#include <sharemind/3rdparty/libsoftfloat/softfloat.h>
+#include <sharemind/libsoftfloat/softfloat.h>
+#include <sharemind/extern_c.h>
 
 
-sf_result32f __sf_float32_cos(sf_float64 x, sf_fpu_state fpu);
-sf_result64f __sf_float64_cos(sf_float64 x, sf_float64 y, sf_fpu_state fpu);
+SHAREMIND_EXTERN_C_BEGIN
 
-#endif /* INTERNAL___SF_COS_H */
+sf_result32f sf_float32_ceil(sf_float32 x, sf_fpu_state fpu);
+sf_result64f sf_float64_ceil(sf_float64 x, sf_fpu_state fpu);
+
+SHAREMIND_EXTERN_C_END
+
+#endif /* SF_CEIL_H */
