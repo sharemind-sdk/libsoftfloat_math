@@ -82,14 +82,13 @@ INSTALL(FILES ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS}
         COMPONENT "dev")
 
 # Install cmake files:
-SET(SharemindLibSoftfloatMath_INSTALL_LIBRARIES
-    "-L${CMAKE_INSTALL_PREFIX}/lib"
-    "-lsharemind_softfloat_math"
+SharemindCreateCMakeFindFiles(
+    INCLUDE_DIRS
+        "${CMAKE_INSTALL_PREFIX}/include"
+    LIBRARIES
+        "-L${CMAKE_INSTALL_PREFIX}/lib"
+        "-lsharemind_softfloat_math"
 )
-SET(SharemindLibSoftfloatMath_INSTALL_INCLUDE_DIRS
-    "${CMAKE_INSTALL_PREFIX}/include"
-)
-SharemindUseCMakeFindFiles()
 
 
 # Packaging:
