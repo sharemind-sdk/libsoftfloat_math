@@ -40,7 +40,7 @@ SharemindSetProjectVersion()
 
 SharemindSetC99CompileOptions(COMPILE_FLAGS "-fwrapv")
 
-FIND_PACKAGE(SharemindCHeaders REQUIRED)
+FIND_PACKAGE(SharemindCHeaders 1.1.0 REQUIRED)
 FIND_PACKAGE(SharemindLibSoftfloat REQUIRED)
 
 INCLUDE_DIRECTORIES(
