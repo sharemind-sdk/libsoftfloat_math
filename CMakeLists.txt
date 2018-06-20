@@ -41,7 +41,7 @@ SharemindSetProjectVersion()
 SharemindSetC99CompileOptions(COMPILE_FLAGS "-fwrapv")
 
 FIND_PACKAGE(SharemindCHeaders 1.1.0 REQUIRED)
-FIND_PACKAGE(SharemindLibSoftfloat REQUIRED)
+FIND_PACKAGE(SharemindLibSoftfloat 0.2.0 REQUIRED)
 
 INCLUDE_DIRECTORIES(
     ${SharemindCHeaders_INCLUDE_DIRS}
@@ -98,7 +98,7 @@ SharemindAddComponentPackage("lib"
     DESCRIPTION "Sharemind SoftFloat Math library"
     DEB_SECTION "libs"
     DEB_DEPENDS
-        "libsharemind-softfloat"
+        "libsharemind-softfloat (>= 0.2.0)"
         "libc6 (>= 2.19)"
 )
 SharemindAddComponentPackage("dev"
