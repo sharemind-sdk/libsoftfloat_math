@@ -36,7 +36,6 @@ INCLUDE("${CMAKE_CURRENT_BINARY_DIR}/config.local" OPTIONAL)
 
 FIND_PACKAGE(SharemindCMakeHelpers 1.3 REQUIRED)
 
-SharemindSetC99CompileOptions(COMPILE_FLAGS "-fwrapv")
 
 FIND_PACKAGE(SharemindCHeaders 1.1.0 REQUIRED)
 FIND_PACKAGE(SharemindLibSoftfloat 0.2.0 REQUIRED)
@@ -64,7 +63,7 @@ LIST(REMOVE_ITEM SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P
 FILE(GLOB_RECURSE SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES
      "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 
-SharemindAddSharedLibrary("libsoftfloat_math"
+SharemindAddSharedLibrary(LibSoftfloatMath
     OUTPUT_NAME "sharemind_softfloat_math"
     SOURCES
         ${SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES}
@@ -74,7 +73,7 @@ SharemindAddSharedLibrary("libsoftfloat_math"
         ${SharemindCHeaders_LIBRARIES}
         ${SharemindLibSoftfloat_LIBRARIES}
 )
-
+TARGET_COMPILE_OPTIONS(LibSoftfloatMath PRIVATE "-fwrapv")
 INSTALL(FILES ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS}
         DESTINATION "include/sharemind/libsoftfloat_math/"
         COMPONENT "dev")
