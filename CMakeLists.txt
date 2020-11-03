@@ -34,55 +34,44 @@ PROJECT(SharemindLibSoftfloatMath VERSION 0.1.2 LANGUAGES C)
 INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/config.local" OPTIONAL)
 INCLUDE("${CMAKE_CURRENT_BINARY_DIR}/config.local" OPTIONAL)
 
-FIND_PACKAGE(SharemindCMakeHelpers 1.3 REQUIRED)
+FIND_PACKAGE(SharemindCMakeHelpers 1.6 REQUIRED)
+
+FIND_PACKAGE(SharemindCHeaders 1.3.0 REQUIRED)
+FIND_PACKAGE(SharemindLibSoftfloat 0.3.0 REQUIRED)
 
 
-FIND_PACKAGE(SharemindCHeaders 1.1.0 REQUIRED)
-FIND_PACKAGE(SharemindLibSoftfloat 0.2.0 REQUIRED)
-
-INCLUDE_DIRECTORIES(
-    ${SharemindCHeaders_INCLUDE_DIRS}
-    ${SharemindLibSoftfloat_INCLUDE_DIRS}
-)
-
-ADD_DEFINITIONS(
-    ${SharemindCHeaders_DEFINITIONS}
-    ${SharemindLibSoftfloat_DEFINITIONS}
-)
-
-################################################################################
-# libsoftfloat_math
-################################################################################
-
+# LibSoftfloatMath:
 FILE(GLOB SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
 FILE(GLOB_RECURSE SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P
     "${CMAKE_CURRENT_SOURCE_DIR}/src/internal/*.h")
 FILE(GLOB_RECURSE SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES
      "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
-
 SharemindAddSharedLibrary(LibSoftfloatMath
     OUTPUT_NAME "sharemind_softfloat_math"
     SOURCES
         ${SHAREMIND_LIBSOFTFLOAT_MATH_SOURCES}
         ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS}
         ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS_P}
-    LINK_LIBRARIES
-        ${SharemindCHeaders_LIBRARIES}
-        ${SharemindLibSoftfloat_LIBRARIES}
 )
 TARGET_COMPILE_OPTIONS(LibSoftfloatMath PRIVATE "-fwrapv")
+TARGET_INCLUDE_DIRECTORIES(LibSoftfloatMath
+    INTERFACE
+        # $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src> # TODO
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include>
+    )
+TARGET_LINK_LIBRARIES(LibSoftfloatMath
+    PUBLIC
+        Sharemind::CHeaders
+        Sharemind::LibSoftfloat
+    )
 INSTALL(FILES ${SHAREMIND_LIBSOFTFLOAT_MATH_HEADERS}
         DESTINATION "include/sharemind/libsoftfloat_math/"
         COMPONENT "dev")
-
-# Install cmake files:
-SharemindCreateCMakeFindFiles(
-    INCLUDE_DIRS
-        "${CMAKE_INSTALL_PREFIX}/include"
-    LIBRARIES
-        "-L${CMAKE_INSTALL_PREFIX}/lib"
-        "-lsharemind_softfloat_math"
+SharemindCreateCMakeFindFilesForTarget(LibSoftfloatMath
+    DEPENDENCIES
+        "SharemindCHeaders 1.3.0"
+        "SharemindLibSoftfloat 0.3.0"
 )
 
 
