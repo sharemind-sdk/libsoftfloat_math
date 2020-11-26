@@ -163,10 +163,11 @@
  *              erfc/erf(NaN) is NaN
  */
 
+#include "sf_erf.h"
+
 #include <stdint.h>
 #include "internal/macros.h"
 #include "sf_abs.h"
-#include "sf_erf.h"
 #include "sf_exp.h"
 
 

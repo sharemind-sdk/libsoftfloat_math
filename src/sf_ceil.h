@@ -31,8 +31,8 @@
 #ifndef SF_CEIL_H
 #define SF_CEIL_H
 
-#include <sharemind/libsoftfloat/softfloat.h>
 #include <sharemind/extern_c.h>
+#include <sharemind/libsoftfloat/softfloat.h>
 
 
 SHAREMIND_EXTERN_C_BEGIN

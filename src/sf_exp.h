@@ -31,8 +31,8 @@
 #ifndef SF_EXP_H
 #define SF_EXP_H
 
-#include <sharemind/libsoftfloat/softfloat.h>
 #include <sharemind/extern_c.h>
+#include <sharemind/libsoftfloat/softfloat.h>
 
 
 SHAREMIND_EXTERN_C_BEGIN

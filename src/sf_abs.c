@@ -55,8 +55,9 @@
  * ----------------------------------------------------------------------
  */
 
-#include <stdint.h>
 #include "sf_abs.h"
+
+#include <stdint.h>
 
 
 sf_float32 sf_float32_abs(sf_float32 x) {

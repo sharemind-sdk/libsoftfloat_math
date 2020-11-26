@@ -125,9 +125,10 @@
  *          if x < -745.133219101941108420 then exp(x) underflows
  */
 
+#include "sf_exp.h"
+
 #include <stdint.h>
 #include "internal/macros.h"
-#include "sf_exp.h"
 #include "sf_scalbn.h"
 
 

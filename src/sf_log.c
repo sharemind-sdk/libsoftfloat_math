@@ -120,10 +120,11 @@
  * to produce the hexadecimal values shown.
  */
 
+#include "sf_log.h"
+
 #include <math.h>
 #include <stdint.h>
 #include "internal/macros.h"
-#include "sf_log.h"
 
 
 static const sf_float32

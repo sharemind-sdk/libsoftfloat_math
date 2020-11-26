@@ -101,11 +101,12 @@
  *      TRIG(x) returns trig(x) nearly rounded
  */
 
+#include "sf_sin.h"
+
 #include "internal/__sf_cos.h"
 #include "internal/__sf_rem_pio2.h"
 #include "internal/__sf_sin.h"
 #include "internal/macros.h"
-#include "sf_sin.h"
 
 
 /* Small multiples of pi/2 rounded to double precision. */

@@ -178,10 +178,11 @@
  */
 
 #include "__sf_rem_pio2_large.h"
-#include "assert.h"
-#include "macros.h"
+
 #include "../sf_floor.h"
 #include "../sf_scalbn.h"
+#include "assert.h"
+#include "macros.h"
 
 
 static const int64_t init_jk[] = { 3, 4, 4, 6 }; /* initial value for jk */

@@ -55,8 +55,9 @@
  * ----------------------------------------------------------------------
  */
 
-#include "internal/macros.h"
 #include "sf_floor.h"
+
+#include "internal/macros.h"
 
 
 static const sf_float64 toint = 0x4330000000000000; /* 1 / 2.22044604925031308085e-16 */
