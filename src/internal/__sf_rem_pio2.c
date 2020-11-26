@@ -88,7 +88,6 @@
  * invpio2:  53 bits of 2/pi
  */
 static const sf_float64
-toint   = 0x4338000000000000, /* 1.5 / 2.22044604925031308085e-16 */
 invpio2 = 0x3fe45f306dc9c883; /* 6.36619772367581382433e-01       */
 
 /*
@@ -126,6 +125,8 @@ sf_result32i __sf_float32_rem_pio2(sf_float32 x, sf_float64 * y, sf_fpu_state fp
     if (ix < 0x4dc90fdb) {  /* |x| ~< 2^28*(pi/2), medium size */
         /* Use a specialized rint() to get fn.  Assume round-to-nearest. */
         { /* fn = x*invpio2 + toint - toint; */
+            static const sf_float64 toint =
+                    0x4338000000000000; /* 1.5 / 2.22044604925031308085e-16 */
             SF_F64_OP(fpu, fn, sf_float32_to_float64, x);
             SF_F64_OP(fpu, fn, sf_float64_mul, fn, invpio2);
             SF_F64_OP(fpu, fn, sf_float64_add, fn, toint);
@@ -286,6 +287,8 @@ sf_result32i __sf_float64_rem_pio2(sf_float64 x, sf_float64 * y, sf_fpu_state fp
 medium:
         /* rint(x/(pi/2)), Assume round-to-nearest. */
         { /* fn = x*invpio2 + toint - toint; */
+            static const sf_float64 toint =
+                    0x4338000000000000; /* 1.5 / 2.22044604925031308085e-16 */
             SF_F64_OP(fpu, fn, sf_float64_mul, x, invpio2);
             SF_F64_OP(fpu, fn, sf_float64_add, fn, toint);
             SF_F64_OP(fpu, fn, sf_float64_sub, fn, toint);

@@ -60,7 +60,6 @@
 #include "internal/macros.h"
 
 
-static const sf_float64 toint = 0x4330000000000000; /* 1 / 2.22044604925031308085e-16 */
 
 sf_result32f sf_float32_floor(sf_float32 x, sf_fpu_state fpu) {
     int32_t e = (int32_t)(x >> 23 & 0xff) - 0x7f;
@@ -99,6 +98,8 @@ sf_result64f sf_float64_floor(sf_float64 x, sf_fpu_state fpu) {
         return (sf_result64f) { x, fpu };
     }
     /* y = int(x) - x, where int(x) is an integer neighbor of x */
+    static const sf_float64 toint =
+            0x4330000000000000; /* 1 / 2.22044604925031308085e-16 */
     if (x >> 63) {
         /* y = x - toint + toint - x; */
         SF_F64_OP(fpu, y, sf_float64_sub, x, toint);
